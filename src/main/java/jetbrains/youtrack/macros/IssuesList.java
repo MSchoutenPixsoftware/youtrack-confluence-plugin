@@ -64,7 +64,7 @@ public class IssuesList extends YouTrackAuthAwareMacroBase {
             final String fieldList = defaultIfNullOrEmpty(params.get(REPORT_FIELD_LIST), DEFAULT_REPORT_FIELD_LIST);
 
             logMessage(MessageFormat.format(" Project: {0} Query: {1} Fields: {2}", project, query, fieldList));
-
+      	          	
             final StringBuilder result = new StringBuilder();
             if (query != null) {
                 logMessage("Starting to query YouTrack.");
@@ -182,6 +182,19 @@ public class IssuesList extends YouTrackAuthAwareMacroBase {
                                 } else {
                                     rows.append("No commentes so far.");
                                 }
+                            } else  if ("State".equals(reportField.title)) {
+                            	
+                            	String stateValue = defaultIfNull(fieldValue, UNKNOWN);
+                            	
+                            	if (isStatusColor(defaultIfNullOrEmpty(params.get(STATUS_COLOR_GREEN_FIELD), STATUS_COLOR_GREEN_DEFAULT), stateValue)) { // done state
+                            		rows.append(MessageFormat.format(STATUS_COLOR_BODY, STATUS_COLOR_GREEN, stateValue));
+                                } else  if (isStatusColor(defaultIfNullOrEmpty(params.get(STATUS_COLOR_YELLOW_FIELD), STATUS_COLOR_YELLOW_DEFAULT), stateValue)) {// in progress    
+                            		rows.append(MessageFormat.format(STATUS_COLOR_BODY, STATUS_COLOR_YELLOW, stateValue));
+                            	} else { // all other
+                            		rows.append(MessageFormat.format(STATUS_COLOR_BODY, STATUS_COLOR_BLUE, stateValue));
+                            	}
+                            	
+                            	
                             } else {
                                 rows.append(fieldValue == null ? UNKNOWN : defaultIfNull(fieldValue, UNKNOWN));
                             }
@@ -223,9 +236,32 @@ public class IssuesList extends YouTrackAuthAwareMacroBase {
             return result.toString();
         } catch (Exception ex) {
             LOG.error("YouTrack report macro encounters error", ex);
+            
+            LOG.error("PARAMS: " + params.toString());
+
         }
 
         return "Issue not specified";
+    }
+    
+    private boolean isStatusColor(String statusesToCheck, String issueStatus) {
+    	
+    	String[] statuses = statusesToCheck.split(",");
+    	
+    	boolean matchedStatus = false;
+    	
+    	for (String status : statuses) {
+    		LOG.error("status: " +status + " issueStatus: " +issueStatus);
+
+    		if (status.trim().toLowerCase().equals(issueStatus.trim().toLowerCase())) {
+        		LOG.error("MATCHED!!");
+        		matchedStatus = true;
+        		break;
+        	}
+    	}
+    	
+    	return matchedStatus;
+    	
     }
 
     @Override

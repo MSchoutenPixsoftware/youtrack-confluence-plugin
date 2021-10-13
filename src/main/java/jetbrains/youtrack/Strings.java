@@ -51,6 +51,20 @@ public class Strings {
     public static final String ID = "id";
     public static final String SUMMARY_FORMATTED = "summaryFormattedText";
     public static final String REPORT_FIELD_LIST = "reportFields";
+    
+    public static final String STATUS_COLOR_GREEN = "aui-lozenge-success";
+    public static final String STATUS_COLOR_BLUE = "aui-lozenge-default";
+    public static final String STATUS_COLOR_YELLOW = "aui-lozenge-current";
+    
+    public static final String STATUS_COLOR_GREEN_FIELD = "statusColorGreen";
+    public static final String STATUS_COLOR_BLUE_FIELD = "statusColorBlue";
+    public static final String STATUS_COLOR_YELLOW_FIELD = "statusColorYellow";
+    
+    public static final String STATUS_COLOR_GREEN_DEFAULT = "done,fixed,closed";
+    public static final String STATUS_COLOR_BLUE_DEFAULT = "open,new";
+    public static final String STATUS_COLOR_YELLOW_DEFAULT = "in progress";
+    
+    public static final String STATUS_COLOR_BODY = "<span class=\"aui-lozenge aui-lozenge-subtle {0}\">{1}</span>";
 
     public static String fixURL(String url) {
         if (url == null) {

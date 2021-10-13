@@ -4,7 +4,7 @@
 #set($rowsWithHtml = $rows)
 #set($paginationWithHtml = $pagination)
 #if ($hasIssues)
-<table>
+<table class="aui">
     <tr>
       $headerWithHtml
     </tr>

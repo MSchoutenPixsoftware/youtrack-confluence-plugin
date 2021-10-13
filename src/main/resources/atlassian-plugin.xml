@@ -15,8 +15,7 @@
     <resource key="icons" name="icons/" type="download" location="images"/>
 
     <xhtml-macro name="issue" class="jetbrains.youtrack.macros.IssueLink" key="youtrack.integration.plugin.issue"
-                 icon="/download/resources/youtrack.integration.plugin/icons/youtrack.png"
-    >
+                 icon="/download/resources/youtrack.integration.plugin/icons/youtrack.png">
         <resource type="velocity" name="help" location="templates/help-link.vm">
             <param name="help-section" value="confluence"/>
         </resource>
@@ -50,6 +49,12 @@
                        default="State:State,summary:Description,Assignee:Assigned to"/>
             <parameter name="pageSize" type="string" required="false" default="25"/>
             <parameter name="numPages" type="string" required="false" default="10"/>
+            <parameter name="statusColorBlue" type="string" required="true"
+                       default="open,new"/>
+            <parameter name="statusColorYellow" type="string" required="true"
+                       default="in progress"/>
+            <parameter name="statusColorGreen" type="string" required="true"
+                       default="done,fixed,closed"/>
         </parameters>
     </xhtml-macro>
 
